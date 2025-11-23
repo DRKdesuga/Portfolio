@@ -99,12 +99,25 @@ export default function App() {
       <section className="relative h-screen w-full flex items-center justify-center overflow-hidden">
         {/* Liquid Silk Wave Background */}
         <div className="absolute inset-0 z-0">
-          <LiquidEther
-            colors={['#5227FF', '#FF9FFC', '#B19EEF']}
-            autoDemo={true}
-            autoSpeed={0.5}
-            autoIntensity={2.2}
-          />
+          <div style={{ width: '100%', height: '100%', position: 'relative' }}>
+            <LiquidEther
+              colors={['#5227FF', '#FF9FFC', '#B19EEF']}
+              mouseForce={20}
+              cursorSize={100}
+              isViscous={false}
+              viscous={30}
+              iterationsViscous={32}
+              iterationsPoisson={32}
+              resolution={0.5}
+              isBounce={false}
+              autoDemo={true}
+              autoSpeed={0.5}
+              autoIntensity={2.2}
+              takeoverDuration={0.25}
+              autoResumeDelay={3000}
+              autoRampDuration={0.6}
+            />
+          </div>
         </div>
 
         {/* Dark overlay for better text contrast */}
@@ -208,7 +221,7 @@ export default function App() {
               {/* Profile Info */}
               <div className="flex-1 text-center md:text-left">
                 <h1 className="text-4xl md:text-5xl text-white/95 mb-3">
-                  Alex Morgan
+                  Hamza
                 </h1>
                 <p className="text-xl text-purple-300/90 mb-4">
                   Full-Stack Developer & UI/UX Designer

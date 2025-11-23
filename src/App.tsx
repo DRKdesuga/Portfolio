@@ -201,34 +201,34 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#0a0a0f] via-[#0f0f19] to-[#1a0a1f] text-white overflow-x-hidden">
-      {/* ==================== HERO SECTION ==================== */}
-      <section className="relative h-screen w-full flex items-center justify-center overflow-hidden">
-        {/* Liquid Silk Wave Background */}
-        <div className="absolute inset-0 z-0">
-          <div style={{ width: '100%', height: '100%', position: 'relative' }}>
-            <LiquidEther
-              colors={['#5227FF', '#FF9FFC', '#B19EEF']}
-              mouseForce={20}
-              cursorSize={100}
-              isViscous={false}
-              viscous={30}
-              iterationsViscous={32}
-              iterationsPoisson={32}
-              resolution={0.5}
-              isBounce={false}
-              autoDemo={true}
-              autoSpeed={0.5}
-              autoIntensity={2.2}
-              takeoverDuration={0.25}
-              autoResumeDelay={3000}
-              autoRampDuration={0.6}
-            />
-          </div>
-        </div>
-
-        {/* Dark overlay for better text contrast */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/50 z-10" />
+    <div className="relative min-h-screen bg-gradient-to-br from-[#0a0a0f] via-[#0f0f19] to-[#1a0a1f] text-white overflow-x-hidden">
+      {/* Global LiquidEther background */}
+      <div className="fixed inset-0 -z-10 pointer-events-none">
+        <LiquidEther
+          colors={['#5227FF', '#FF9FFC', '#B19EEF']}
+          mouseForce={20}
+          cursorSize={100}
+          isViscous={false}
+          viscous={30}
+          iterationsViscous={32}
+          iterationsPoisson={32}
+          resolution={0.6}
+          isBounce={false}
+          autoDemo={true}
+          autoSpeed={0.5}
+          autoIntensity={2.2}
+          takeoverDuration={0.25}
+          autoResumeDelay={3000}
+          autoRampDuration={0.6}
+        />
+      </div>
+      {/* Gradient tint for readability */}
+      <div className="fixed inset-0 z-0 bg-gradient-to-br from-[#0a0a0f]/85 via-[#0f0f19]/75 to-[#1a0a1f]/85 pointer-events-none" />
+      <div className="relative z-10">
+        {/* ==================== HERO SECTION ==================== */}
+        <section className="relative h-screen w-full flex items-center justify-center overflow-hidden">
+          {/* Dark overlay for better text contrast */}
+          <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/10 to-black/50 z-10" />
 
         {/* Hero Content */}
         <motion.div
@@ -429,6 +429,8 @@ export default function App() {
           </motion.div>
         </div>
       </section>
+
+      </div>
 
       {/* Project Modal */}
       {selectedProject && (

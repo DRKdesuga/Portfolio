@@ -110,8 +110,8 @@ export default function ProjectModal({ isOpen, onClose, project }: ProjectModalP
               {/* Tech highlights */}
               {project.tech.length > 0 && (
                 <div className="mb-8">
-                  <h3 className="text-purple-300 mb-4">Tech Highlights</h3>
-                  <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2 list-disc list-inside marker:text-purple-400 text-white/80">
+                  <h3 className="text-purple-500 mb-4 font-semibold">Tech Highlights</h3>
+                  <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2 list-disc list-inside marker:text-purple-500 text-white/80">
                     {project.tech.map((item, index) => (
                       <li key={index}>{item}</li>
                     ))}

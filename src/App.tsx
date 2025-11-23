@@ -237,19 +237,9 @@ export default function App() {
           transition={{ delay: 0.3, duration: 1 }}
           className="relative z-20 text-center px-4 max-w-4xl mx-auto"
         >
-          {/* Small label */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5, duration: 0.6 }}
-            className="inline-block px-4 py-2 rounded-full glass-button text-sm text-purple-200/90 mb-8"
-          >
-            Portfolio
-          </motion.div>
-
-          {/* Main heading with split text animation */}
-          <SplitText
-            text="Welcome to my portfolio"
+            {/* Main heading with split text animation */}
+            <SplitText
+              text="Welcome to my portfolio"
             className="text-5xl md:text-7xl text-white/95 mb-6"
             delay={700}
             duration={0.6}
@@ -267,7 +257,7 @@ export default function App() {
             transition={{ delay: 1.5, duration: 0.8 }}
             className="text-xl text-white/70 mb-12 max-w-2xl mx-auto"
           >
-            Crafting exceptional digital experiences with modern technologies
+            Turning complexity into clarity through modern software engineering.
           </motion.p>
 
           {/* CTA Button */}
@@ -378,51 +368,23 @@ export default function App() {
             <div className="flex flex-col md:flex-row items-center justify-between gap-6">
               <div className="text-center md:text-left">
                 <h3 className="text-2xl text-white/95 mb-2">
-                  Let's stay in touch
+                  Exploration as a Way of Thinking
                 </h3>
                 <p className="text-white/60">
-                  Connect with me on social media or drop me an email
+                  Discover more projects and code on my GitHub !
                 </p>
               </div>
 
               {/* Social Icons */}
               <div className="flex gap-4">
                 <motion.a
-                  href="https://github.com"
+                  href="https://github.com/DRKdesuga"
                   target="_blank"
                   rel="noopener noreferrer"
                   whileHover={{ scale: 1.1, y: -3 }}
                   className="p-4 rounded-xl glass-button hover:neon-glow-purple transition-all duration-300 group"
                 >
                   <Github className="w-6 h-6 text-white/70 group-hover:text-white transition-colors" />
-                </motion.a>
-
-                <motion.a
-                  href="https://linkedin.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  whileHover={{ scale: 1.1, y: -3 }}
-                  className="p-4 rounded-xl glass-button hover:neon-glow-cyan transition-all duration-300 group"
-                >
-                  <Linkedin className="w-6 h-6 text-white/70 group-hover:text-white transition-colors" />
-                </motion.a>
-
-                <motion.a
-                  href="https://twitter.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  whileHover={{ scale: 1.1, y: -3 }}
-                  className="p-4 rounded-xl glass-button hover:neon-glow-cyan transition-all duration-300 group"
-                >
-                  <Twitter className="w-6 h-6 text-white/70 group-hover:text-white transition-colors" />
-                </motion.a>
-
-                <motion.a
-                  href="mailto:hello@example.com"
-                  whileHover={{ scale: 1.1, y: -3 }}
-                  className="p-4 rounded-xl glass-button hover:neon-glow-pink transition-all duration-300 group"
-                >
-                  <Mail className="w-6 h-6 text-white/70 group-hover:text-white transition-colors" />
                 </motion.a>
               </div>
             </div>

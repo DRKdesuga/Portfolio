@@ -2,87 +2,194 @@ import { useState } from 'react';
 import { ChevronDown, Github, Linkedin, Twitter, Mail } from 'lucide-react';
 import { motion } from 'motion/react';
 import LiquidEther from './components/LiquidEther';
+import profileImg from './assets/img/me.jpg';
 import SplitText from './components/SplitText';
 import ProjectBubble from './components/ProjectBubble';
 import ProjectModal from './components/ProjectModal';
+import tigerImg from './assets/img/tiger-banner.png';
+import pingImg from './assets/img/ping-banner.png';
+import auraImg from './assets/img/aura.png';
+import shell42Img from './assets/img/42sh-banner.png';
+import nexusImg from './assets/img/nxus-banner.png';
+import jwsImg from './assets/img/jws-banner.png';
+import eroImg from './assets/img/ero-banner.png';
+import sysaliasImg from './assets/img/sysalias-banner.png';
+import mybtImg from './assets/img/mybt-banner.png';
+import libzorkImg from './assets/img/libzork-banner.png';
+import myfindImg from './assets/img/myfind-banner.png';
+import mallocImg from './assets/img/malloc-banner.png';
+import pingDemo from './assets/demos/ping.mp4';
+import auraDemo from './assets/demos/aura.mp4';
+import shell42Demo from './assets/demos/42sh.mp4';
+import nexusDemo from './assets/demos/nexus.mp4';
+import sysaliasDemo from './assets/demos/sysalias.mp4';
+import myfindDemo from './assets/demos/myfind.mp4';
+import mallocDemo from './assets/demos/malloc.mp4';
 
-// Mock project data
 const projects = [
   {
-    title: 'Analytics Dashboard',
-    subtitle: 'Real-time data visualization platform',
-    image: 'https://images.unsplash.com/photo-1759661966728-4a02e3c6ed91?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxkYXRhJTIwYW5hbHl0aWNzJTIwdmlzdWFsaXphdGlvbnxlbnwxfHx8fDE3NjM3OTMxNjh8MA&ixlib=rb-4.1.0&q=80&w=1080',
+    slug: 'tiger',
+    title: 'Tiger Compiler',
+    subtitle: 'Modular compiler pipeline for the Tiger language.',
+    image: tigerImg,
     description: [
-      'A comprehensive analytics dashboard that provides real-time insights into business metrics and KPIs. Built with a focus on performance and user experience.',
-      'Features include interactive charts, customizable widgets, and advanced filtering capabilities. The platform handles millions of data points efficiently.',
-      'Designed to help teams make data-driven decisions with confidence through clear visualizations and actionable insights.'
+      'A complete, educational compiler toolchain for the Tiger language: lexer (Flex), parser (Bison) with tracked locations, typed AST construction, and desugaring of high-level constructs into core forms.',
+      'The desugared AST doubles as an intermediate representation for further passes, with utilities for debug printing and structured dumps—turning the project into a practical playground for compiler design.'
     ],
-    tags: ['Analytics', 'Real-time', 'Dashboard'],
-    stack: [
-      { category: 'Frontend', items: ['Angular 17', 'Tailwind CSS', 'Chart.js'] },
-      { category: 'Backend', items: ['Spring Boot 3', 'Java 21', 'Redis'] },
-      { category: 'Database', items: ['PostgreSQL', 'TimescaleDB'] },
-      { category: 'DevOps', items: ['Docker', 'Kubernetes', 'GitLab CI'] }
-    ],
-    demoUrl: '#demo',
-    repoUrl: '#repo'
+    tech: ['C', 'C++', 'Flex', 'Bison', 'AST', 'Desugaring', 'IR', 'Autotools'],
+    tags: ['Compiler', 'C/C++', 'Parsing'],
+    links: [{ label: 'GitHub', url: 'https://github.com/DRKdesuga' }]
   },
   {
-    title: 'E-Commerce Platform',
-    subtitle: 'Modern shopping experience',
-    image: 'https://images.unsplash.com/photo-1727407209320-1fa6ae60ee05?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxlY29tbWVyY2UlMjBzaG9wcGluZ3xlbnwxfHx8fDE3NjM3ODgxMTF8MA&ixlib=rb-4.1.0&q=80&w=1080',
+    slug: 'ping',
+    title: 'PING',
+    subtitle: 'Quarkus + React workspace manager with JWT, projects, folders & files.',
+    image: pingImg,
     description: [
-      'A full-featured e-commerce platform that delivers a seamless shopping experience across all devices. Built with scalability and performance in mind.',
-      'Includes advanced product search, personalized recommendations, secure payment processing, and order tracking. Supports multiple payment gateways and shipping providers.',
-      'The admin panel provides comprehensive tools for inventory management, order processing, and customer analytics.'
+      'Lightweight workspace manager with a Quarkus 3 (Java 21) backend exposing REST for authentication (JWT with RSA dev keys) and resources (projects, folders, files: list/upload/move/delete multipart).',
+      'PostgreSQL persistence with OpenAPI 3 documentation, plus a Vite/React frontend to browse workspaces and interact with endpoints. Optimized for rapid setup, hot reload, and straightforward local dev.'
     ],
-    tags: ['E-Commerce', 'Payment', 'Mobile'],
-    stack: [
-      { category: 'Frontend', items: ['React 18', 'Next.js 14', 'TypeScript'] },
-      { category: 'Backend', items: ['Node.js', 'Express', 'Stripe API'] },
-      { category: 'Database', items: ['MongoDB', 'Redis Cache'] },
-      { category: 'DevOps', items: ['Vercel', 'AWS S3', 'GitHub Actions'] }
-    ],
-    demoUrl: '#demo',
-    repoUrl: '#repo'
+    tech: ['Java 21', 'Quarkus 3', 'REST', 'JWT (RS256)', 'PostgreSQL', 'Hibernate', 'OpenAPI 3', 'Maven', 'React', 'Vite'],
+    tags: ['Java', 'Quarkus', 'React'],
+    links: [{ label: 'GitHub', url: 'https://github.com/DRKdesuga' }],
+    demoUrl: pingDemo
   },
   {
-    title: 'Mobile Fitness App',
-    subtitle: 'Track workouts and progress',
-    image: 'https://images.unsplash.com/photo-1605108222700-0d605d9ebafe?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtb2JpbGUlMjBhcHAlMjBpbnRlcmZhY2V8ZW58MXx8fHwxNzYzNzk2ODc3fDA&ixlib=rb-4.1.0&q=80&w=1080',
+    slug: 'aura',
+    title: 'AURA – Artificial User Response Assistant',
+    subtitle: 'Local full-stack AI assistant (Angular + Spring Boot + PostgreSQL + Ollama).',
+    image: auraImg,
     description: [
-      'A mobile-first fitness application that helps users track their workouts, set goals, and monitor progress over time. Features an intuitive interface designed for quick logging.',
-      'Includes workout plans, exercise library with video demonstrations, progress charts, and social features to connect with other fitness enthusiasts.',
-      'Integrates with popular wearables and health apps to provide a comprehensive view of your fitness journey.'
+      'Fully local AI assistant: Spring Boot backend, Angular frontend, Ollama inference engine—no cloud or external APIs.',
+      'Backend: Spring Boot 3 (Java 21) + PostgreSQL storing sessions/messages; REST API under /api/chat and /api/sessions with configurable Ollama connector.',
+      'Frontend: Angular 17 standalone dark UI with real-time chat, session handling, and model responses; scripts to auto-start/stop the stack and warm models for privacy-first local LLM usage.'
     ],
-    tags: ['Mobile', 'Health', 'PWA'],
-    stack: [
-      { category: 'Frontend', items: ['React Native', 'Expo', 'Native Base'] },
-      { category: 'Backend', items: ['Firebase', 'Cloud Functions'] },
-      { category: 'Database', items: ['Firestore', 'Cloud Storage'] },
-      { category: 'APIs', items: ['HealthKit', 'Google Fit'] }
-    ],
-    demoUrl: '#demo',
-    repoUrl: '#repo'
+    tech: ['Java 21', 'Spring Boot 3.3', 'Spring Data JPA', 'PostgreSQL 15', 'Angular 17', 'TypeScript', 'Standalone Components', 'Ollama (LLaMA 3.2)', 'REST API', 'Docker', 'Maven', 'Node.js 20', 'Shell Scripts'],
+    tags: ['AI', 'Angular', 'Spring Boot'],
+    links: [{ label: 'GitHub – AURA', url: 'https://github.com/DRKdesuga/AURA' }],
+    demoUrl: auraDemo
   },
   {
-    title: 'Web Dashboard Suite',
-    subtitle: 'Enterprise management system',
-    image: 'https://images.unsplash.com/photo-1665470909939-959569b20021?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtb2Rlcm4lMjB3ZWIlMjBkYXNoYm9hcmR8ZW58MXx8fHwxNzYzODExODYxfDA&ixlib=rb-4.1.0&q=80&w=1080',
+    slug: '42sh',
+    title: '42sh',
+    subtitle: 'POSIX-compliant UNIX shell with redirections, pipes, and control structures.',
+    image: shell42Img,
     description: [
-      'An enterprise-grade dashboard suite that centralizes business operations and provides actionable insights. Built for scalability and ease of use.',
-      'Features include role-based access control, customizable dashboards, automated reporting, and integration with popular business tools.',
-      'Designed to streamline workflows and improve team collaboration across departments.'
+      'POSIX-compatible command interpreter: simple/compound execution, redirections (>, >>, <, 2>), pipelines, logical operators (&&, ||), sub-shells, control structures (if/while/for/case), env management, and built-ins (cd, exit, export, unset, echo…).',
+      'Built with Autotools targets for testing/installation; a practical UNIX shell implemented at EPITA.'
     ],
-    tags: ['Enterprise', 'SaaS', 'B2B'],
-    stack: [
-      { category: 'Frontend', items: ['Vue 3', 'Vuetify', 'Pinia'] },
-      { category: 'Backend', items: ['Django', 'Python 3.11', 'Celery'] },
-      { category: 'Database', items: ['PostgreSQL', 'ElasticSearch'] },
-      { category: 'DevOps', items: ['Docker Compose', 'Nginx', 'Jenkins'] }
+    tech: ['C', 'UNIX', 'POSIX', 'Autotools'],
+    tags: ['Shell', 'C', 'POSIX'],
+    links: [{ label: 'GitHub', url: 'https://github.com/DRKdesuga' }],
+    demoUrl: shell42Demo
+  },
+  {
+    slug: 'nxus',
+    title: 'Nexus',
+    subtitle: 'Spring Boot 3.2 & Angular 17 assistant integrating Spotify, GPT, and NLP.',
+    image: nexusImg,
+    description: [
+      'Full-stack AI assistant: Spring Boot backend + Angular frontend integrating Spotify (OAuth), OpenAI GPT, and local NLP intent detection (DJL embeddings + regex slot extractors).',
+      'Backend uses layered architecture with Swagger/OpenAPI and Docker Compose for local deployment; frontend offers modern controls for Spotify playback and AI interactions.'
     ],
-    demoUrl: '#demo',
-    repoUrl: '#repo'
+    tech: ['Java 21', 'Spring Boot 3.2', 'Spring Web & WebFlux', 'Angular 17', 'TypeScript', 'OAuth 2.0', 'OpenAI API', 'DJL (PyTorch Embeddings)', 'Swagger / OpenAPI', 'Lombok', 'Docker Compose', 'Maven'],
+    tags: ['Spring', 'Angular', 'AI'],
+    links: [{ label: 'GitHub – NX-US', url: 'https://github.com/DRKdesuga/NX-US' }],
+    demoUrl: nexusDemo
+  },
+  {
+    slug: 'jws',
+    title: 'JWS',
+    subtitle: 'Event-driven microservices ecosystem (Kafka) for a game simulation.',
+    image: jwsImg,
+    description: [
+      'Event-driven game backend modeled with Kafka: inventory service as source of truth, item producer parsing .epimap files, and shop service exposing REST for buy/sell logic.',
+      'Services communicate via commands/aggregates (no shared DB) and follow strict boundaries—practical DDD with async messaging and separation of concerns.'
+    ],
+    tech: ['Java 17', 'Quarkus', 'Apache Kafka', 'PostgreSQL', 'Hibernate Panache', 'Maven', 'DDD'],
+    tags: ['Kafka', 'DDD', 'Quarkus'],
+    links: [{ label: 'GitHub', url: 'https://github.com/DRKdesuga' }]
+  },
+  {
+    slug: 'ero',
+    title: 'ERO1',
+    subtitle: 'Operations research on urban graphs with OSM data.',
+    image: eroImg,
+    description: [
+      'Operations-research toolkit over urban graphs from OpenStreetMap: directed graph modeling with coverage problems (Chinese Postman, Eulerian traversals, DFS variants) and shortest-path (Dijkstra, A*, Bellman-Ford).',
+      'Includes CLI, optional Tkinter GUI, and visualizations (Matplotlib/Folium) with a simple virtual-env setup for quick experimentation.'
+    ],
+    tech: ['Python 3.9+', 'OSMnx', 'NetworkX', 'Matplotlib', 'Folium', 'Tkinter', 'CLI'],
+    tags: ['Python', 'Graphs', 'OR'],
+    links: [{ label: 'GitHub', url: 'https://github.com/DRKdesuga' }]
+  },
+  {
+    slug: 'sysalias',
+    title: 'Sysalias',
+    subtitle: 'Lightweight C CLI to manage shell aliases via a JSON registry.',
+    image: sysaliasImg,
+    description: [
+      'Centralizes shell aliases in JSON and syncs with bash/zsh: add/remove/list, import/export, doctor health checks, and generated fragments (aliases.bash / aliases.zsh).',
+      'Install via Make or scripts with optional system-wide mode; pragmatic tool to keep aliases tidy and versionable.'
+    ],
+    tech: ['C', 'Make', 'Shell (bash/zsh)', 'JSON', 'Installer Scripts'],
+    tags: ['CLI', 'C', 'Shell'],
+    links: [{ label: 'GitHub – Sysalias', url: 'https://github.com/DRKdesuga/Sysalias' }],
+    demoUrl: sysaliasDemo
+  },
+  {
+    slug: 'mybt',
+    title: 'My-BitTorrent',
+    subtitle: 'Modular BitTorrent client in C with Meson.',
+    image: mybtImg,
+    description: [
+      'In-progress BitTorrent client targeting spec compliance with clean modular layout: mbtbe (bencoding), mbtfile (piece validation/disk I/O), mbtnet (peer connections & piece exchange via epoll), mbtutils (strings, views, memory helpers).',
+      'Meson build; CLI supports .torrent creation, binding IP/port, pretty-printing torrent metadata, and verbose logging.'
+    ],
+    tech: ['C', 'Meson', 'epoll', 'Networking', 'Bencode', 'CLI'],
+    tags: ['Networking', 'C', 'BitTorrent'],
+    links: [{ label: 'GitHub', url: 'https://github.com/DRKdesuga' }]
+  },
+  {
+    slug: 'libzork',
+    title: 'libZork',
+    subtitle: 'C++ framework for graph-based interactive text adventures.',
+    image: libzorkImg,
+    description: [
+      'Author interactive fiction as YAML-described graphs; runners traverse nodes/choices with conditions. Includes CMake build, CLI loader, example assets, and debugging aids.',
+      'Screenshots show story execution flow and graph visualization for a “Secret” storyline—compact sandbox for narrative engines.'
+    ],
+    tech: ['C++', 'CMake', 'YAML', 'CLI', 'Graph Model'],
+    tags: ['C++', 'CLI', 'Graphs'],
+    links: [{ label: 'GitHub', url: 'https://github.com/DRKdesuga' }]
+  },
+  {
+    slug: 'myfind',
+    title: 'MyFind',
+    subtitle: 'C implementation of Unix find with logical operators and predicates.',
+    image: myfindImg,
+    description: [
+      'Minimal reimplementation of Unix find: parses expressions with AND/OR/NOT via tokenizer, shunting-yard parser, and AST evaluator.',
+      'Supports -name, -newer, -perm, -user, -group, -type, plus actions -print and -delete; recursive traversal with lstat safety and Makefile targets for builds.'
+    ],
+    tech: ['C (POSIX)', 'Makefile', 'Filesystem API', 'fnmatch', 'User/group lookup', 'Permission bits', 'Recursive traversal'],
+    tags: ['C', 'POSIX', 'Filesystem'],
+    links: [{ label: 'GitHub', url: 'https://github.com/DRKdesuga' }],
+    demoUrl: myfindDemo
+  },
+  {
+    slug: 'malloc',
+    title: 'Custom Malloc Library',
+    subtitle: 'C allocator overriding malloc/free/calloc/realloc as libmalloc.so.',
+    image: mallocImg,
+    description: [
+      'Custom memory allocator in C compiled to libmalloc.so and preloaded to intercept standard allocation calls; handles multiple non-contiguous pages, long double alignment, calloc overflow checks, and realloc resizing.',
+      'Blocks tracked via internal metadata; tested/debugged via LD_PRELOAD. Makefile provides build/clean targets.'
+    ],
+    tech: ['C (POSIX)', 'Memory Management', 'Dynamic Allocation', 'Shared Library (.so)', 'Makefile', 'LD_PRELOAD', 'sbrk / mmap', 'Pointer arithmetic'],
+    tags: ['C', 'Allocator', 'Systems'],
+    links: [{ label: 'GitHub', url: 'https://github.com/DRKdesuga' }],
+    demoUrl: mallocDemo
   }
 ];
 
@@ -212,7 +319,7 @@ export default function App() {
                 className="flex-shrink-0"
               >
                 <img
-                  src="https://images.unsplash.com/photo-1737575655055-e3967cbefd03?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwcm9mZXNzaW9uYWwlMjBkZXZlbG9wZXIlMjBwb3J0cmFpdHxlbnwxfHx8fDE3NjM4MzE0OTh8MA&ixlib=rb-4.1.0&q=80&w=1080"
+                  src={profileImg}
                   alt="Profile"
                   className="w-32 h-32 md:w-40 md:h-40 rounded-full object-cover profile-neon"
                 />
@@ -224,12 +331,10 @@ export default function App() {
                   Hamza
                 </h1>
                 <p className="text-xl text-purple-300/90 mb-4">
-                  Full-Stack Developer & UI/UX Designer
+                  Software Engineering Student
                 </p>
                 <p className="text-white/70 max-w-2xl">
-                  Passionate about creating beautiful, performant web applications. 
-                  Specializing in React, TypeScript, and modern backend technologies. 
-                  Always learning and exploring new ways to solve complex problems.
+                  Passionate about system programming, scalable software, and solving complex problems — driven by curiosity, math, weightlifting, philosophy, and cinema. Major in Software Engineering & Information Systems.
                 </p>
               </div>
             </div>

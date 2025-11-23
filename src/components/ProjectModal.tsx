@@ -6,17 +6,15 @@ interface ProjectModalProps {
   isOpen: boolean;
   onClose: () => void;
   project: {
+    slug?: string;
     title: string;
     subtitle: string;
     image: string;
     description: string[];
-    stack: {
-      category: string;
-      items: string[];
-    }[];
+    tech: string[];
     tags: string[];
     demoUrl?: string;
-    repoUrl?: string;
+    links?: { label: string; url: string }[];
   };
 }
 
@@ -67,7 +65,7 @@ export default function ProjectModal({ isOpen, onClose, project }: ProjectModalP
               {/* Close button */}
               <button
                 onClick={onClose}
-                className="absolute top-6 right-6 p-2 rounded-full glass-button hover:bg-white/10 transition-all duration-300 group"
+                className="absolute top-2 right-2 z-10 p-2 rounded-full glass-button bg-black/40 backdrop-blur-md border border-white/10 hover:bg-white/10 transition-all duration-300 group"
               >
                 <X className="w-6 h-6 text-white/70 group-hover:text-white group-hover:rotate-90 transition-all duration-300" />
               </button>
@@ -109,22 +107,17 @@ export default function ProjectModal({ isOpen, onClose, project }: ProjectModalP
                 ))}
               </div>
 
-              {/* Tech Stack */}
-              <div className="mb-8">
-                <h3 className="text-white/90 mb-4">Tech Stack Used</h3>
-                <div className="space-y-3">
-                  {project.stack.map((category, index) => (
-                    <div key={index} className="flex flex-col sm:flex-row gap-2">
-                      <span className="text-purple-300/90 min-w-[120px]">
-                        {category.category}:
-                      </span>
-                      <span className="text-white/70">
-                        {category.items.join(', ')}
-                      </span>
-                    </div>
-                  ))}
+              {/* Tech highlights */}
+              {project.tech.length > 0 && (
+                <div className="mb-8">
+                  <h3 className="text-purple-300 mb-4">Tech Highlights</h3>
+                  <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2 list-disc list-inside marker:text-purple-400 text-white/80">
+                    {project.tech.map((item, index) => (
+                      <li key={index}>{item}</li>
+                    ))}
+                  </ul>
                 </div>
-              </div>
+              )}
 
               {/* Action Buttons */}
               <div className="flex flex-wrap gap-4">
@@ -138,16 +131,17 @@ export default function ProjectModal({ isOpen, onClose, project }: ProjectModalP
                     See Live Demo
                   </a>
                 )}
-                {project.repoUrl && (
+                {project.links?.map((link, index) => (
                   <a
-                    href={project.repoUrl}
+                    key={index}
+                    href={link.url}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="glass-button px-6 py-3 rounded-xl hover:scale-105 transition-all duration-300 text-white/90 hover:text-white neon-glow-pink"
                   >
-                    View Repository
+                    {link.label}
                   </a>
-                )}
+                ))}
               </div>
             </div>
           </motion.div>
